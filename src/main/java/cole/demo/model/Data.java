@@ -33,8 +33,8 @@ public class Data {
     private String quality;
     private String wendu;
     private String ganmao;
-    @JoinColumn(name="DATA_ID")
-    @OneToOne
+    @JoinColumn(name="YESTERDAY_ID")
+    @OneToOne (cascade=CascadeType.ALL)
     private Yesterday yesterday;
 
     @Override
@@ -50,8 +50,8 @@ public class Data {
                 ", forecast=" + forecast +
                 '}';
     }
-    @JoinColumn(name="DATA_FOR_ID")
-    @OneToMany
+    @JoinColumn(name="FORECAST_ID")
+    @OneToMany (cascade=CascadeType.ALL)
     private List<Forecast> forecast;
     public void setShidu(String shidu) {
          this.shidu = shidu;

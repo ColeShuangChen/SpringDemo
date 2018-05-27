@@ -34,8 +34,8 @@ public class Weather {
 
     private String city;
     private int count;
-    @JoinColumn(name="WEATHER_ID")
-    @OneToOne
+    @JoinColumn(name="Data_ID")
+    @OneToOne (cascade=CascadeType.ALL)
     private Data data;
     public void setDate(String date) {
          this.date = date;

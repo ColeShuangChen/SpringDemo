@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<meta charset="UTF-8"/>
+<title>结果</title>
+
+
+<div th:switch="${#lists.isEmpty(result)}">
+    <div th:case="true">
+        <h3 th:text="无匹配结果"></h3>
+    </div>
+    <div th:case="false">
+        <div th:each="city : ${result}">
+            <h3 th:text="${city.name}"></h3>
+            日期:<p th:text="${city.weather.date}"></p>
+            温度:<p th:text="${city.weather.data.getWendu()}"></p>
+            湿度：<p th:text="${city.weather.data.getShidu()}">湿度： </p>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <p class="bg-info">以下admin 可见信息</p>
+                PM2.5: <p th:text="${city.weather.data.getPm25()}"></p>
+                <table border="1">
+                    <tr>
+                        <th>日期</th>
+                        <th>最高</th>
+                        <th>最低</th>
+                        <th>注意x</th>
+                    </tr>
+                    <tr th:each="forecast : ${city.weather.data.forecast}">
+                        <td th:text="${forecast.date}">Onions</td>
+                        <td th:text="${forecast.high}">test@test.com.cn</td>
+                        <td th:text="${forecast.low}">yes</td>
+                        <th th:text="${forecast.notice}">状态变量：index</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

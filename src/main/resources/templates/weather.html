@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<meta charset="UTF-8"/>
+<title>天气</title>
+<div th:each="error : ${errors}" style="color:red">
+    <p th:text="${error.defaultMessage}"></p>
+</div>
+<form class="form-weather" role="form" name="form" th:action="@{/weather}" action="/weather " method="post">
+    <select name="cityName" id="cityName" lay-verify="">
+        <option value="">请选择想要查看的城市</option>
+        <option th:each="city:${cities}" th:selected="${city == name}" th:value="${city}" th:text="${city}"></option>
+        <input type="submit" id="login" value="查询"/>
+    </select>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        pm小于:<input type="number" value="" name="maxPM"/>
+    </div>
+</form>
+
+</html>
+
