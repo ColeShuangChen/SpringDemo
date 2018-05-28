@@ -66,6 +66,7 @@ public class CityItemReader implements ItemReader<City> {
             }
             return city;
         } else {
+            cities = cityService.getAllCity().iterator();
             return null;
         }
 
